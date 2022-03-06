@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - 8888:80
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+  adminer:
+    image: adminer:latest
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+
+
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
